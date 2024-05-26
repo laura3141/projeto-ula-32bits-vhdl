@@ -5,11 +5,11 @@ entity ula is
 
   port(a,b,carry_in,selB: in std_logic;
   		sel: in std_logic_vector (1 downto 0);
-       s,carry_out: out std_logic);
+       s,carry_out,overflow: out std_logic);
        
 end ula;
 
-architecture ula_arch of ula is
+architecture ula_arch of ula isAC
 
 	component mux_invert is 
     	  port (b,nB : in std_logic;
@@ -29,7 +29,8 @@ architecture ula_arch of ula is
           b: in std_logic;
           carry_in: in std_logic;
           soma: out std_logic;
-          carry_out: out std_logic
+          carry_out: out std_logic;
+          overflow: out std_logic
     	);
     end component;
     
@@ -73,9 +74,10 @@ architecture ula_arch of ula is
         port map(
                 a => a,
                 b => sinal_6,
-                carry_in => carry_in,
+                carry_in => selB,
                 soma=>sinal_1,
-                carry_out=>carry_out);
+                carry_out=>carry_out,
+                overflow=>overflow);
     
     p_and: porta_and
         port map(
@@ -103,5 +105,5 @@ architecture ula_arch of ula is
                 e4 =>sinal_4,
                 sel => sel,
                 s => s);
-
+	
 end ula_arch;

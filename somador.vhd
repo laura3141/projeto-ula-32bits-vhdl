@@ -8,7 +8,8 @@ entity somador_completo is
         b: in std_logic;
         carry_in: in std_logic;
         soma: out std_logic;
-        carry_out: out std_logic
+        carry_out: out std_logic;
+        overflow: out std_logic
     );
 end somador_completo;
 
@@ -49,4 +50,5 @@ begin
 
     
     carry_out <= S_primeiro_carry or S_segundo_carry;
+    overflow <= carry_in xor carry_out;
 end somador_completo_arch;
